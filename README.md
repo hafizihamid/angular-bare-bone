@@ -2,9 +2,8 @@
 
 Angular starter project that consist of modules, configuration, scripts, folders, routing, API handling and All
 
-
-
 ## Running the Application
+
 Install Node.js
 
 Install the Angular CLI:
