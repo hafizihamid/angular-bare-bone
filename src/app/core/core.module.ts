@@ -4,6 +4,7 @@ import { ForgotPasswordComponent } from "./authentication/forgot-password/forgot
 import { LoginComponent } from "./authentication/login/login.component";
 import { ResetPasswordComponent } from "./authentication/reset-password/reset-password.component";
 import { SetPasswordComponent } from "./authentication/set-password/set-password.component";
+import { CoreRoutingModule } from "./core-routing.module";
 
 @NgModule({
     declarations: [
@@ -12,6 +13,6 @@ import { SetPasswordComponent } from "./authentication/set-password/set-password
         ResetPasswordComponent,
         SetPasswordComponent,
     ],
-    imports: [CommonModule],
+    imports: [CommonModule, CoreRoutingModule],
 })
 export class CoreModule {}
