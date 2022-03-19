@@ -6,6 +6,7 @@ import { ResetPasswordComponent } from "./authentication/reset-password/reset-pa
 import { SetPasswordComponent } from "./authentication/set-password/set-password.component";
 import { CoreRoutingModule } from "./core-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
+import { RegistrationComponent } from "./authentication/registration/registration.component";
 
 @NgModule({
     declarations: [
@@ -13,6 +14,7 @@ import { ReactiveFormsModule } from "@angular/forms";
         ForgotPasswordComponent,
         ResetPasswordComponent,
         SetPasswordComponent,
+        RegistrationComponent,
     ],
     imports: [CommonModule, CoreRoutingModule, ReactiveFormsModule],
 })
