@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { User } from "src/app/shared/models/user";
 
 @Component({
@@ -8,12 +8,12 @@ import { User } from "src/app/shared/models/user";
     styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-    loginForm: FormGroup;
+    loginForm: UntypedFormGroup;
     isSubmit = false;
     user: User;
     emailPattern = "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$";
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(private formBuilder: UntypedFormBuilder) {}
 
     ngOnInit(): void {
         this.login();
