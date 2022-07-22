@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
-import { User } from "src/app/shared/models/user";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthenticationService } from "../../authService/authentication.service";
+import { first } from "rxjs/operators";
+import { UserData } from "src/app/shared/models/user";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "app-login",
@@ -8,12 +11,16 @@ import { User } from "src/app/shared/models/user";
     styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-    loginForm: UntypedFormGroup;
+    loginForm: FormGroup;
     isSubmit = false;
-    user: User;
+    user: UserData;
     emailPattern = "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$";
 
-    constructor(private formBuilder: UntypedFormBuilder) {}
+    constructor(
+        private formBuilder: FormBuilder,
+        private authService: AuthenticationService,
+        private router: Router,
+    ) {}
 
     ngOnInit(): void {
         this.login();
@@ -23,7 +30,7 @@ export class LoginComponent implements OnInit {
         this.loginForm = this.formBuilder.group({
             emailAddress: ["", [Validators.required, Validators.pattern(this.emailPattern)]],
             password: ["", [Validators.required]],
-            rememberMe: [false, Validators.requiredTrue],
+            rememberMe: [false],
         });
     }
 
@@ -35,6 +42,20 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.invalid) {
             return;
         } else {
+            const data = {
+                email: this.formControl["emailAddress"].value,
+                password: this.formControl["password"].value,
+                rememberMe: this.formControl["rememberMe"].value,
+            };
+            this.authService
+                .login(data.email, data.password, data.rememberMe)
+                .pipe(first())
+                .subscribe({
+                    next: () => {
+                        this.router.navigateByUrl("/admin");
+                    },
+                    error: error => {},
+                });
         }
     }
 }
